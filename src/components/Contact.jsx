@@ -21,7 +21,6 @@ const socials = [
     href: 'mailto:navaneeth@vitchennai.ac.in',
   },
 ]
-
 export default function Contact() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
