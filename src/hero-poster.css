@@ -1,0 +1,113 @@
+/* ─── HERO POSTER CARD ───────────────────────────────────────────── */
+/* Add this block to the bottom of src/index.css                      */
+
+.hero__poster-wrap {
+  position: absolute;
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  perspective: 900px;
+  z-index: 2;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .hero__poster-wrap {
+    position: relative;
+    right: unset;
+    top: unset;
+    transform: none;
+    margin: 2.5rem auto 0;
+    width: fit-content;
+  }
+}
+
+.hero__poster-card {
+  position: relative;
+  width: 260px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.hero__poster-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── NAVA TEXT SWEEP (horizontal moving glow) ───────────────────── */
+/* Positioned over the "NAVA" text band in the image (~15-58% from top) */
+
+.nava-glow-sweep {
+  position: absolute;
+  top: 12%;
+  left: -60%;
+  width: 55%;
+  height: 46%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(210, 30, 30, 0.45) 45%,
+    rgba(255, 80, 30, 0.35) 65%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  mix-blend-mode: screen;
+}
+
+/* ─── NAVA TEXT HALO (static red bloom behind text) ─────────────── */
+
+.nava-glow-halo {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  right: 0;
+  height: 46%;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    rgba(190, 20, 20, 0.28) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ─── HOVER STATE ────────────────────────────────────────────────── */
+
+.hero__poster-card:hover .nava-glow-halo {
+  opacity: 1;
+  animation: navaFlicker 1.1s ease-in-out infinite;
+}
+
+.hero__poster-card:hover .nava-glow-sweep {
+  opacity: 1;
+  animation:
+    navaSweep  1.6s linear infinite,
+    navaFlicker 0.95s ease-in-out infinite;
+}
+
+/* ─── KEYFRAMES ──────────────────────────────────────────────────── */
+
+@keyframes navaSweep {
+  0%   { left: -60%; }
+  100% { left: 110%; }
+}
+
+@keyframes navaFlicker {
+  0%,  100% { opacity: 1;    }
+  18%        { opacity: 0.55; }
+  36%        { opacity: 0.88; }
+  52%        { opacity: 0.42; }
+  70%        { opacity: 0.92; }
+  85%        { opacity: 0.6;  }
+}

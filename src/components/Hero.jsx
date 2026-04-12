@@ -1,56 +1,92 @@
 import { useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import HeroScene from './HeroScene'
 
 export default function Hero() {
-  const mouse = useRef({ x: 0, y: 0 })
+  const ref = useRef(null)
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
 
-  const handleMouseMove = (e) => {
-    mouse.current.x = (e.clientX / window.innerWidth - 0.5) * 2
-    mouse.current.y = (e.clientY / window.innerHeight - 0.5) * 2
+  const rx = useSpring(useTransform(my, [-1, 1], [6, -6]), { stiffness: 80, damping: 18 })
+  const ry = useSpring(useTransform(mx, [-1, 1], [-6, 6]), { stiffness: 80, damping: 18 })
+  const tx = useSpring(useTransform(mx, [-1, 1], [-8, 8]), { stiffness: 60, damping: 20 })
+  const ty = useSpring(useTransform(my, [-1, 1], [-5, 5]), { stiffness: 60, damping: 20 })
+
+  const onMove = (e) => {
+    const r = ref.current.getBoundingClientRect()
+    mx.set(((e.clientX - r.left) / r.width) * 2 - 1)
+    my.set(((e.clientY - r.top) / r.height) * 2 - 1)
   }
+  const onLeave = () => { mx.set(0); my.set(0) }
 
   return (
-    <section id="hero" className="hero" onMouseMove={handleMouseMove}>
-      <div className="hero__canvas">
-        <HeroScene mouse={mouse} />
-      </div>
+    <section className="hero" ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}>
+      <HeroScene />
 
-      <div className="container">
-        <motion.div
-          className="hero__content"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 1.6, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="hero__badge">
-            <span />
+      {/* Two-column inner wrapper */}
+      <div className="hero__inner">
+
+        {/* LEFT — text content */}
+        <div className="hero__content">
+          <motion.div
+            className="hero__badge"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
             VIT Chennai · AI/ML Student
-          </div>
+          </motion.div>
 
-          <h1 className="hero__name">
+          <motion.h1
+            className="hero__name"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+          >
             <span>Navaneeth</span>
-          </h1>
+          </motion.h1>
 
-          <p className="hero__tagline">
-            <strong>AI/ML Developer</strong> — crafting intelligent systems,
-            exploring neural architectures and building web experiences that matter.
-          </p>
+          <motion.p
+            className="hero__tagline"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            Building AI-powered experiences at the intersection of code and creativity.
+          </motion.p>
 
-          <div className="hero__actions">
-            <a href="#projects" className="btn-primary">
-              View Projects →
-            </a>
-            <a href="#contact" className="btn-outline">
-              Get In Touch
-            </a>
+          <motion.div
+            className="hero__cta"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65 }}
+          >
+            <a href="#projects" className="btn btn--primary">View Projects</a>
+            <a href="#contact" className="btn btn--ghost">Get in Touch</a>
+          </motion.div>
+        </div>
+
+        {/* RIGHT — poster card with parallax + glow */}
+        <motion.div
+          className="hero__poster-wrap"
+          style={{ rotateX: rx, rotateY: ry, x: tx, y: ty }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.45, duration: 0.7, ease: 'easeOut' }}
+        >
+          <div className="hero__poster-card">
+            <img
+              src="/nava-poster.jpg"
+              alt="Navaneeth"
+              className="hero__poster-img"
+              draggable={false}
+            />
+            {/* Overlays for NAVA text glow — positioned over the text band */}
+            <div className="nava-glow-sweep" aria-hidden="true" />
+            <div className="nava-glow-halo" aria-hidden="true" />
           </div>
         </motion.div>
-      </div>
 
-      <div className="hero__scroll">
-        <div className="hero__scroll__line" />
-        scroll
       </div>
     </section>
   )
