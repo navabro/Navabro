@@ -1,35 +1,51 @@
-/* ─── HERO POSTER CARD ───────────────────────────────────────────── */
-/* Add this block to the bottom of src/index.css                      */
+/* ================================================================
+   PASTE THIS ENTIRE BLOCK AT THE BOTTOM OF src/index.css
+   ================================================================ */
 
-.hero__poster-wrap {
-  position: absolute;
-  right: 7%;
-  top: 50%;
-  transform: translateY(-50%);
-  perspective: 900px;
+/* --- Hero layout: two-column flex -------------------------------  */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero__inner {
+  position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+/* Text column */
+.hero__content {
+  flex: 1 1 auto;
+  max-width: 560px;
+}
+
+/* --- Poster wrap (right column) --------------------------------- */
+.hero__poster-wrap {
+  flex: 0 0 auto;
+  perspective: 900px;
   will-change: transform;
 }
 
-@media (max-width: 768px) {
-  .hero__poster-wrap {
-    position: relative;
-    right: unset;
-    top: unset;
-    transform: none;
-    margin: 2.5rem auto 0;
-    width: fit-content;
-  }
-}
-
+/* --- Card shell ------------------------------------------------- */
 .hero__poster-card {
   position: relative;
   width: 260px;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
+    0 12px 48px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.07);
   cursor: pointer;
   transform-style: preserve-3d;
 }
@@ -42,29 +58,9 @@
   pointer-events: none;
 }
 
-/* ─── NAVA TEXT SWEEP (horizontal moving glow) ───────────────────── */
-/* Positioned over the "NAVA" text band in the image (~15-58% from top) */
-
-.nava-glow-sweep {
-  position: absolute;
-  top: 12%;
-  left: -60%;
-  width: 55%;
-  height: 46%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(210, 30, 30, 0.45) 45%,
-    rgba(255, 80, 30, 0.35) 65%,
-    transparent 100%
-  );
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  mix-blend-mode: screen;
-}
-
-/* ─── NAVA TEXT HALO (static red bloom behind text) ─────────────── */
+/* --- NAVA glow overlays ----------------------------------------- */
+/* Both divs sit over the "NAVA" text band (~top 12–58% of the image).
+   Adjust these percentages if the glow needs repositioning.         */
 
 .nava-glow-halo {
   position: absolute;
@@ -72,17 +68,31 @@
   left: 0;
   right: 0;
   height: 46%;
-  background: radial-gradient(
-    ellipse 80% 60% at 50% 50%,
-    rgba(190, 20, 20, 0.28) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(ellipse 80% 55% at 50% 50%,
+      rgba(190, 20, 20, 0.30) 0%,
+      transparent 70%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* ─── HOVER STATE ────────────────────────────────────────────────── */
+.nava-glow-sweep {
+  position: absolute;
+  top: 12%;
+  left: -65%;
+  width: 55%;
+  height: 46%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(215, 35, 35, 0.50) 45%,
+      rgba(255, 85, 30, 0.38) 65%,
+      transparent 100%);
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+/* --- Hover triggers --------------------------------------------- */
 
 .hero__poster-card:hover .nava-glow-halo {
   opacity: 1;
@@ -92,22 +102,64 @@
 .hero__poster-card:hover .nava-glow-sweep {
   opacity: 1;
   animation:
-    navaSweep  1.6s linear infinite,
+    navaSweep 1.6s linear infinite,
     navaFlicker 0.95s ease-in-out infinite;
 }
 
-/* ─── KEYFRAMES ──────────────────────────────────────────────────── */
+/* --- Keyframes -------------------------------------------------- */
 
 @keyframes navaSweep {
-  0%   { left: -60%; }
-  100% { left: 110%; }
+  0% {
+    left: -65%;
+  }
+
+  100% {
+    left: 110%;
+  }
 }
 
 @keyframes navaFlicker {
-  0%,  100% { opacity: 1;    }
-  18%        { opacity: 0.55; }
-  36%        { opacity: 0.88; }
-  52%        { opacity: 0.42; }
-  70%        { opacity: 0.92; }
-  85%        { opacity: 0.6;  }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  18% {
+    opacity: 0.50;
+  }
+
+  36% {
+    opacity: 0.85;
+  }
+
+  52% {
+    opacity: 0.38;
+  }
+
+  70% {
+    opacity: 0.90;
+  }
+
+  85% {
+    opacity: 0.55;
+  }
+}
+
+/* --- Responsive ------------------------------------------------- */
+
+@media (max-width: 860px) {
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 6rem;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .hero__poster-card {
+    width: 220px;
+  }
 }
