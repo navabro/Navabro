@@ -30,18 +30,18 @@ export default function Hero() {
         <div className="hero__content">
           <motion.div
             className="hero__badge"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
           >
             VIT Chennai · AI/ML Student
           </motion.div>
 
           <motion.h1
             className="hero__name"
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.35 }}
           >
             <span>Navaneeth</span>
           </motion.h1>
@@ -50,7 +50,7 @@ export default function Hero() {
             className="hero__tagline"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.5 }}
           >
             Building AI-powered experiences at the intersection of code and creativity.
           </motion.p>
@@ -59,7 +59,7 @@ export default function Hero() {
             className="hero__cta"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.65 }}
           >
             <a href="#projects" className="btn btn--primary">View Projects</a>
             <a href="#contact" className="btn btn--ghost">Get in Touch</a>
@@ -70,16 +70,18 @@ export default function Hero() {
         <motion.div
           className="hero__poster-wrap"
           style={{ rotateX: rx, rotateY: ry, x: tx, y: ty }}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.45, duration: 0.7, ease: 'easeOut' }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.45 }}
         >
           <div className="hero__poster-card">
-            <img
-              src="/nava-poster.jpg"
-              alt="Navaneeth"
+            <video
+              src="/video.mp4"
               className="hero__poster-img"
-              draggable={false}
+              autoPlay
+              loop
+              muted
+              playsInline
             />
             {/* Overlays for NAVA text glow — positioned over the text band */}
             <div className="nava-glow-sweep" aria-hidden="true" />

@@ -64,9 +64,9 @@ export default function Contact() {
       <div className="container">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <p className="section-label">Say Hello</p>
           <h2 className="section-title">Let's Build Something</h2>
@@ -77,9 +77,9 @@ export default function Contact() {
           {/* Info + Socials */}
           <motion.div
             className="contact__info"
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
           >
             <h3>Open to Opportunities</h3>
             <p>
@@ -94,9 +94,9 @@ export default function Contact() {
                   className="social-link"
                   target="_blank"
                   rel="noreferrer"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.25 + i * 0.1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, ease: 'easeOut', delay: 0.25 + i * 0.1 }}
                   whileHover={{ x: 6 }}
                 >
                   <span className="social-link__icon">{s.icon}</span>
@@ -113,9 +113,9 @@ export default function Contact() {
           <motion.form
             className="contact-form"
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
           >
             <div className="form-group">
               <label htmlFor="name">Name</label>

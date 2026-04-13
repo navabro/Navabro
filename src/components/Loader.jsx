@@ -14,19 +14,19 @@ export default function Loader({ done }) {
           className="loader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <motion.div
             className="loader__ring"
             animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 0.9, ease: 'linear' }}
+            transition={{ duration: 0.6, ease: 'easeOut', repeat: Infinity }}
             style={{ animation: 'none' }}
           />
           <motion.p
             className="loader__text"
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
           >
             Loading
           </motion.p>

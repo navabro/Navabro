@@ -11,7 +11,7 @@
   font-weight: 700;
   font-size: 2.2rem;
   letter-spacing: 0.5px;
-  background: rgba(5, 8, 16, 0.75);
+  background: var(--bg-soft);
   padding: 8px 16px;
   border-radius: 999px;
   backdrop-filter: blur(16px);
@@ -41,7 +41,7 @@
   left: -2px;
   right: -2px;
   height: 2.5px;
-  background: linear-gradient(90deg, #ef4444, #9333ea);
+  background: var(--accent);
   border-radius: 2px;
   margin-top: -1px;
   opacity: 0.8;
@@ -49,7 +49,7 @@
 
 .new-name {
   color: #ffffff;
-  background: linear-gradient(135deg, #ffffff 20%, var(--neon, #7c3aed), var(--neon2, #06b6d4));
+  background: linear-gradient(135deg, #ffffff 20%, var(--accent), var(--text));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -65,3 +65,4 @@
     padding: 6px 14px;
   }
 }
+

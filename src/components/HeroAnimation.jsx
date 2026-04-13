@@ -59,25 +59,39 @@ export default function HeroAnimation() {
            </motion.div>
         </div>
 
+        {/* ABSOLUTE TOP-LEFT VIDEO (Placed relative to full screen wrapper) */}
+        <div className="hero-video-wrapper">
+          <video
+            src="/video.mp4"
+            className="hero-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        </div>
+
+
         {/* MID / FOREGROUND LAYER */}
         <motion.div className="hero__inner" style={{ opacity: innerOpacity, y: innerY }}>
+
           
           {/* LEFT — text content */}
           <div className="hero__content">
             <motion.div
               className="hero__badge"
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
             >
               VIT Chennai · AI/ML Student
             </motion.div>
 
             <motion.h1
               className="hero__name"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.35 }}
             >
               <span>Navaneeth</span>
             </motion.h1>
@@ -86,7 +100,7 @@ export default function HeroAnimation() {
               className="hero__tagline"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.5 }}
             >
               Building AI-powered experiences at the intersection of code and creativity.
             </motion.p>
@@ -95,32 +109,14 @@ export default function HeroAnimation() {
               className="hero__actions"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.65 }}
+              transition={{ duration: 0.6, ease: 'easeOut', delay: 0.65 }}
             >
               <a href="#projects" className="btn-primary">View Projects</a>
               <a href="#contact" className="btn-outline">Get in Touch</a>
             </motion.div>
           </div>
 
-          {/* RIGHT — poster card with parallax + glow */}
-          <motion.div
-            className="hero__poster-wrap"
-            style={{ rotateX: rx, rotateY: ry, x: tx, y: ty }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.45, duration: 0.7, ease: 'easeOut' }}
-          >
-            <div className="hero__poster-card nava-glow-container">
-              <img
-                src="/nava-poster.jpeg"
-                alt="Navaneeth"
-                className="hero__poster-img"
-                draggable={false}
-              />
-              <div className="nava-glow-sweep" aria-hidden="true" />
-              <div className="nava-glow-halo" aria-hidden="true" />
-            </div>
-          </motion.div>
+          {/* RIGHT POSTER WRAP REMOVED AS REQUESTED */}
 
         </motion.div>
       </div>

@@ -29,7 +29,7 @@ function ParticleField({ count = 3500 }) {
     <Points ref={ref} positions={positions} stride={3} frustumCulled>
       <PointMaterial
         transparent
-        color="#7c3aed"
+        color="#ff6044"
         size={0.025}
         sizeAttenuation
         depthWrite={false}
@@ -67,33 +67,33 @@ function FloatingGeo() {
       <mesh ref={mesh1} position={[2.5, 0.5, -1]}>
         <icosahedronGeometry args={[0.55, 0]} />
         <meshStandardMaterial
-          color="#7c3aed"
+          color="#ff6044"
           wireframe
           transparent
           opacity={0.7}
-          emissive="#7c3aed"
+          emissive="#ff6044"
           emissiveIntensity={0.4}
         />
       </mesh>
       <mesh ref={mesh2} position={[-2.8, -0.8, -0.5]}>
         <octahedronGeometry args={[0.45, 0]} />
         <meshStandardMaterial
-          color="#06b6d4"
+          color="#ff6044"
           wireframe
           transparent
           opacity={0.65}
-          emissive="#06b6d4"
+          emissive="#ff6044"
           emissiveIntensity={0.5}
         />
       </mesh>
       <mesh ref={mesh3} position={[1.2, 0, -2]}>
         <tetrahedronGeometry args={[0.4, 0]} />
         <meshStandardMaterial
-          color="#f59e0b"
+          color="#ff6044"
           wireframe
           transparent
           opacity={0.6}
-          emissive="#f59e0b"
+          emissive="#ff6044"
           emissiveIntensity={0.4}
         />
       </mesh>
@@ -118,8 +118,8 @@ export default function HeroScene({ mouse }) {
       gl={{ antialias: true, alpha: true }}
     >
       <ambientLight intensity={0.3} />
-      <pointLight position={[4, 4, 4]} intensity={0.8} color="#7c3aed" />
-      <pointLight position={[-4, -2, 2]} intensity={0.6} color="#06b6d4" />
+      <pointLight position={[4, 4, 4]} intensity={0.8} color="#ff6044" />
+      <pointLight position={[-4, -2, 2]} intensity={0.6} color="#ff6044" />
       <ParticleField />
       <FloatingGeo />
       <CameraRig mouse={mouse} />

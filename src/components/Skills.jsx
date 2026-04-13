@@ -34,9 +34,9 @@ function SkillCard({ skill, index }) {
     <motion.div
       ref={ref}
       className="skill-card"
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.07,  }}
       whileHover={{ scale: 1.04 }}
     >
       <div className="skill-card__icon" style={{ display: 'flex', alignItems: 'center', transition: 'all 0.3s' }}>
@@ -46,9 +46,10 @@ function SkillCard({ skill, index }) {
       <div className="skill-card__level">
         <motion.div
           className="skill-card__bar"
-          initial={{ scaleX: 0 }}
+          custom={index}
+          initial={{ scaleX: 0, transformOrigin: 'left' }}
           animate={inView ? { scaleX: skill.level / 100 } : {}}
-          transition={{ duration: 1, delay: 0.3 + index * 0.07, ease: 'easeOut' }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.3 + index * 0.07 }}
         />
       </div>
     </motion.div>
@@ -64,9 +65,9 @@ export default function Skills() {
       <div className="container">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <p className="section-label">What I Work With</p>
           <h2 className="section-title">Skills &amp; Stack</h2>
