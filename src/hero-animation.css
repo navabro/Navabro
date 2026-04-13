@@ -1,0 +1,195 @@
+/* ================================================================
+   HERO BURST ANIMATION
+   Builds upon previous hero-poster.css
+   ================================================================ */
+
+/* --- Container for Scrolling ------------------------------------  */
+.hero-scroll-container {
+  position: relative;
+  height: 200vh; /* Scrollytelling track length */
+  width: 100%;
+}
+
+.hero-sticky-wrap {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* Background Burst Layer */
+.hero-burst-space {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.nava-burst-text {
+  position: absolute;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(200px, 20vw, 400px);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: 0.05em;
+  color: #ffffff; 
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+/* The exit sweep text */
+.nava-sweep-text {
+  position: absolute;
+  z-index: 10;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 30vw;
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* --- Hero layout: two-column flex -------------------------------  */
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  will-change: transform, opacity;
+}
+
+/* Text column */
+.hero__content {
+  flex: 1 1 auto;
+  max-width: 560px;
+}
+
+/* --- Poster wrap (right column) --------------------------------- */
+.hero__poster-wrap {
+  flex: 0 0 auto;
+  perspective: 900px;
+  will-change: transform;
+}
+
+/* --- Card shell ------------------------------------------------- */
+.hero__poster-card {
+  position: relative;
+  width: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 12px 48px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+}
+
+.hero__poster-card:hover {
+  transform: scale(1.03);
+}
+
+.hero__poster-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --- NAVA glow overlays ----------------------------------------- */
+/* Both divs sit over the "NAVA" text band (~top 12–58% of the image).
+   Adjust these percentages if the glow needs repositioning.         */
+
+.nava-glow-halo {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  right: 0;
+  height: 46%;
+  background: radial-gradient(ellipse 80% 55% at 50% 50%,
+      rgba(220, 20, 20, 0.45) 0%,
+      transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nava-glow-sweep {
+  position: absolute;
+  top: 12%;
+  left: -65%;
+  width: 55%;
+  height: 46%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(235, 35, 35, 0.60) 45%,
+      rgba(255, 100, 30, 0.45) 65%,
+      transparent 100%);
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+/* --- Hover triggers --------------------------------------------- */
+
+.hero__poster-card:hover .nava-glow-halo {
+  opacity: 1;
+  animation: navaFlicker 1.1s ease-in-out infinite;
+}
+
+.hero__poster-card:hover .nava-glow-sweep {
+  opacity: 1;
+  animation:
+    navaSweep 1.6s linear infinite,
+    navaFlicker 0.95s ease-in-out infinite;
+}
+
+/* --- Keyframes -------------------------------------------------- */
+
+@keyframes navaSweep {
+  0% { left: -65%; }
+  100% { left: 110%; }
+}
+
+@keyframes navaFlicker {
+  0%, 100% { opacity: 1; filter: brightness(1.2); }
+  18% { opacity: 0.50; filter: brightness(0.8); }
+  36% { opacity: 0.85; filter: brightness(1.1); }
+  52% { opacity: 0.38; filter: brightness(0.6); }
+  70% { opacity: 0.90; filter: brightness(1.15); }
+  85% { opacity: 0.55; filter: brightness(0.9); }
+}
+
+@media (max-width: 860px) {
+  .hero-scroll-container {
+    height: 180vh;
+  }
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 6rem;
+  }
+  .hero__content {
+    max-width: 100%;
+  }
+  .nava-burst-text {
+    font-size: 25vw;
+  }
+}
+

@@ -1,0 +1,97 @@
+/* ================================================================
+   IDENTITY TRANSITION SECTION
+   ================================================================ */
+
+.identity-section {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg, #050810);
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Optional subtle radial glow in the background */
+.identity-section::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.identity-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.identity-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap; /* allows breaking on tiny screens, though gap handles most */
+  gap: 2rem;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: clamp(2.5rem, 6vw, 5rem); /* roughly 3rem to 5rem depending on viewport */
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.identity-old-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.identity-old {
+  color: var(--text-muted, #64748b);
+  opacity: 0.8;
+}
+
+.identity-strike {
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  right: -5%;
+  height: 6px;
+  background: linear-gradient(90deg, #ef4444, #9333ea);
+  border-radius: 4px;
+  margin-top: -3px;
+  transform-origin: left center;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.identity-new {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 20%, var(--neon, #7c3aed), var(--neon2, #06b6d4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .identity-section {
+    min-height: 50vh;
+  }
+  
+  .identity-switch {
+    gap: 1rem;
+    flex-direction: column;
+    letter-spacing: -1px;
+  }
+  
+  .identity-strike {
+    height: 4px;
+    margin-top: -2px;
+  }
+}

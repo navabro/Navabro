@@ -1,32 +1,62 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+import { ShieldCheck, Bot, LayoutTemplate, TerminalSquare, Database, Server, Cog, Blocks, Code2 } from 'lucide-react'
+
+// Custom React Logo since react-icons blocked via user restricted NPM proxy
+const ReactBrand = ({ size = 28 }) => (
+  <svg width={size} height={size} viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="0" cy="0" r="2.05" fill="currentColor"/>
+    <g stroke="currentColor" strokeWidth="1" fill="none">
+      <ellipse rx="11" ry="4.2"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+    </g>
+  </svg>
+)
+
+const techIconMap = {
+  'React': <ReactBrand size={18} />,
+  'Python': <TerminalSquare size={18} />,
+  'FastAPI': <Server size={18} />,
+  'Node.js': <Server size={18} />,
+  'MongoDB': <Database size={18} />,
+  'NLP': <Bot size={18} />,
+  'Docker': <Blocks size={18} />,
+  'Chrome Extension': <Cog size={18} />,
+  'Scikit-learn': <Cog size={18} />,
+  'Express': <Server size={18} />,
+  'JWT': <ShieldCheck size={18} />
+}
+
+const getTechIcon = (tag) => techIconMap[tag] || <Code2 size={18} />
+
 const projects = [
   {
-    icon: '🛡️',
+    icon: <ShieldCheck size={26} />,
     title: 'SpamShield AI',
     desc: 'Production-grade email security platform with a multi-stage ML pipeline (Naive Bayes + SGD + Transformer). Features explainable AI, phishing detection, a Chrome extension for Gmail, and an adaptive feedback loop for continuous retraining.',
     tags: ['Python', 'FastAPI', 'NLP', 'React', 'Chrome Extension'],
     accent: '#7c3aed',
-    github: 'https://github.com/navaneeth',
+    github: 'https://github.com/navabro',
     demo: '#',
   },
   {
-    icon: '🤖',
+    icon: <Bot size={26} />,
     title: 'ML Model Pipeline',
     desc: 'End-to-end machine learning pipeline for text classification. Custom preprocessing, feature engineering, model comparison dashboard, and real-time inference API built with FastAPI and deployed on the cloud.',
     tags: ['Scikit-learn', 'FastAPI', 'Docker', 'Python'],
     accent: '#06b6d4',
-    github: 'https://github.com/navaneeth',
+    github: 'https://github.com/navabro',
     demo: '#',
   },
   {
-    icon: '🌐',
+    icon: <LayoutTemplate size={26} />,
     title: 'Full-Stack Web App',
     desc: 'Modern full-stack application with a React frontend featuring glassmorphism UI, a Node.js + Express backend, MongoDB Atlas integration, real-time CRUD operations, and authentication with JWT.',
     tags: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT'],
     accent: '#f59e0b',
-    github: 'https://github.com/navaneeth',
+    github: 'https://github.com/navabro',
     demo: '#',
   },
 ]
@@ -50,7 +80,10 @@ function ProjectCard({ project, index }) {
       <p className="project-card__desc">{project.desc}</p>
       <div className="project-card__tags">
         {project.tags.map((t) => (
-          <span className="tag" key={t}>{t}</span>
+          <span className="tag" key={t} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ opacity: 0.8, display: 'flex' }}>{getTechIcon(t)}</span>
+            {t}
+          </span>
         ))}
       </div>
       <div className="project-card__links">

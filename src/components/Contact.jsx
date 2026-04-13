@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 
 const socials = [
   {
     icon: '🐙',
     name: 'GitHub',
-    handle: '@navaneeth',
-    href: 'https://github.com/navaneeth',
+    handle: '@navabro',
+    href: 'https://github.com/navabro',
   },
   {
     icon: '💼',
@@ -17,8 +18,8 @@ const socials = [
   {
     icon: '✉️',
     name: 'Email',
-    handle: 'navaneeth@vitchennai.ac.in',
-    href: 'mailto:navaneeth@vitchennai.ac.in',
+    handle: 'navaneeth.v2024@vitstudent.ac.in',
+    href: 'mailto:navaneeth.v2024@vitstudent.ac.in',
   },
 ]
 export default function Contact() {
@@ -34,12 +35,28 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    // Simulate send — wire up EmailJS or backend here
-    await new Promise((r) => setTimeout(r, 1200))
-    setLoading(false)
-    setStatus('success')
-    setForm({ name: '', email: '', message: '' })
-    setTimeout(() => setStatus(null), 4000)
+    
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE,
+        import.meta.env.VITE_EMAILJS_TEMPLATE,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC
+      )
+      
+      setStatus('success')
+      setForm({ name: '', email: '', message: '' })
+    } catch (error) {
+      console.error("EmailJS Error:", error)
+      setStatus('error')
+    } finally {
+      setLoading(false)
+      setTimeout(() => setStatus(null), 4000)
+    }
   }
 
   return (

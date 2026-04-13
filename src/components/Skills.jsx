@@ -1,15 +1,29 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+import { BrainCircuit, Database, GitBranch, Webhook, Network, Pyramid, TerminalSquare } from 'lucide-react'
+
+// Custom React SVG Logo since react-icons install was blocked
+const ReactBrand = ({ size = 28 }) => (
+  <svg width={size} height={size} viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="0" cy="0" r="2.05" fill="currentColor"/>
+    <g stroke="currentColor" strokeWidth="1" fill="none">
+      <ellipse rx="11" ry="4.2"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+      <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+    </g>
+  </svg>
+)
+
 const skills = [
-  { name: 'Python',    icon: '🐍', level: 90 },
-  { name: 'AI / ML',  icon: '🧠', level: 85 },
-  { name: 'React',    icon: '⚛️', level: 80 },
-  { name: 'Three.js', icon: '🌐', level: 72 },
-  { name: 'DSA',      icon: '📊', level: 78 },
-  { name: 'SQL',      icon: '🗄️', level: 75 },
-  { name: 'Git',      icon: '🔧', level: 82 },
-  { name: 'APIs',     icon: '🔌', level: 85 },
+  { name: 'Python',    icon: <TerminalSquare size={28} />, level: 90 },
+  { name: 'AI / ML',  icon: <BrainCircuit size={28} />,   level: 85 },
+  { name: 'React',    icon: <ReactBrand size={28} />,     level: 80 },
+  { name: 'Three.js', icon: <Pyramid size={28} />,        level: 72 },
+  { name: 'DSA',      icon: <Network size={28} />,        level: 78 },
+  { name: 'SQL',      icon: <Database size={28} />,       level: 75 },
+  { name: 'Git',      icon: <GitBranch size={28} />,      level: 82 },
+  { name: 'APIs',     icon: <Webhook size={28} />,        level: 85 },
 ]
 
 function SkillCard({ skill, index }) {
@@ -25,7 +39,9 @@ function SkillCard({ skill, index }) {
       transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ scale: 1.04 }}
     >
-      <div className="skill-card__icon">{skill.icon}</div>
+      <div className="skill-card__icon" style={{ display: 'flex', alignItems: 'center', transition: 'all 0.3s' }}>
+        {skill.icon}
+      </div>
       <div className="skill-card__name">{skill.name}</div>
       <div className="skill-card__level">
         <motion.div
