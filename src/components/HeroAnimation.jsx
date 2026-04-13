@@ -63,6 +63,7 @@ export default function HeroAnimation() {
         <div className="hero-video-wrapper">
           <video
             src="/video.mp4"
+            poster="/nava-poster.jpeg"
             className="hero-video"
             autoPlay
             loop
