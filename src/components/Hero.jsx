@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import HeroScene from './HeroScene'
 
@@ -6,6 +6,15 @@ export default function Hero() {
   const ref = useRef(null)
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const rx = useSpring(useTransform(my, [-1, 1], [6, -6]), { stiffness: 80, damping: 18 })
   const ry = useSpring(useTransform(mx, [-1, 1], [-6, 6]), { stiffness: 80, damping: 18 })
@@ -61,28 +70,34 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.65 }}
           >
-            <a href="#projects" className="btn btn--primary">View Projects</a>
-            <a href="#contact" className="btn btn--ghost">Get in Touch</a>
+            <a href="#projects" className="btn btn-primary">View Projects</a>
+            <a href="#contact" className="btn btn-outline">Get in Touch</a>
           </motion.div>
         </div>
 
         {/* RIGHT — poster card with parallax + glow */}
         <motion.div
-          className="hero__poster-wrap"
+          className="hero-video-wrapper"
           style={{ rotateX: rx, rotateY: ry, x: tx, y: ty }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.45 }}
         >
           <div className="hero__poster-card">
-            <video
-              src="/video.mp4"
-              className="hero__poster-img"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
+            {isMobile ? (
+              <img src="/nava-poster.jpeg" className="hero-video" alt="Poster" />
+            ) : (
+              <video
+                src="/video.mp4"
+                poster="/nava-poster.jpeg"
+                className="hero-video"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              />
+            )}
             {/* Overlays for NAVA text glow — positioned over the text band */}
             <div className="nava-glow-sweep" aria-hidden="true" />
             <div className="nava-glow-halo" aria-hidden="true" />

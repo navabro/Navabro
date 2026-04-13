@@ -3,7 +3,7 @@ import { useRef } from 'react'
 
 const stats = [
   { num: '2nd', label: 'Year @ VIT' },
-  { num: '3+', label: 'Projects Built' },
+  { num: '12+', label: 'Projects Built' },
   { num: '8+', label: 'Technologies' },
   { num: '∞', label: 'Curiosity' },
 ]
@@ -16,7 +16,7 @@ function FadeIn({ children, delay = 0 }) {
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: 'easeOut', delay,  }}
+      transition={{ duration: 0.6, ease: 'easeOut', delay, }}
     >
       {children}
     </motion.div>
@@ -47,8 +47,7 @@ export default function About() {
                   be both powerful and beautifully usable.
                 </p>
                 <p>
-                  When I'm not training models, you'll find me exploring new frameworks, 
-                  contributing to projects, or diving deep into DSA challenges.
+                  When I'm not training models, you'll find me SLEEPING....
                 </p>
               </div>
             </FadeIn>

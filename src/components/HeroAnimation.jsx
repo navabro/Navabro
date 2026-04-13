@@ -1,10 +1,18 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useMotionValue, useTransform, useSpring, useScroll } from 'framer-motion'
 import HeroScene from './HeroScene'
 import '../hero-animation.css'
 
 export default function HeroAnimation() {
   const containerRef = useRef(null)
+
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   
   // -- Scrollytelling Setup --
   const { scrollYProgress } = useScroll({
@@ -59,17 +67,26 @@ export default function HeroAnimation() {
            </motion.div>
         </div>
 
-        {/* ABSOLUTE TOP-LEFT VIDEO (Placed relative to full screen wrapper) */}
+        {/* TOP-LEFT VIDEO — replaced with poster image on mobile */}
         <div className="hero-video-wrapper">
-          <video
-            src="/video.mp4"
-            poster="/nava-poster.jpeg"
-            className="hero-video"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
+          {isMobile ? (
+            <img
+              src="/nava-poster.jpeg"
+              className="hero-video"
+              alt="Navaneeth poster"
+            />
+          ) : (
+            <video
+              src="/video.mp4"
+              poster="/nava-poster.jpeg"
+              className="hero-video"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            />
+          )}
         </div>
 
 
