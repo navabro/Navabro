@@ -6,11 +6,11 @@ import { ShieldCheck, Bot, LayoutTemplate, TerminalSquare, Database, Server, Cog
 // Custom React Logo since react-icons blocked via user restricted NPM proxy
 const ReactBrand = ({ size = 28 }) => (
   <svg width={size} height={size} viewBox="-11.5 -10.23174 23 20.46348" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="0" cy="0" r="2.05" fill="currentColor"/>
+    <circle cx="0" cy="0" r="2.05" fill="currentColor" />
     <g stroke="currentColor" strokeWidth="1" fill="none">
-      <ellipse rx="11" ry="4.2"/>
-      <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
-      <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+      <ellipse rx="11" ry="4.2" />
+      <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+      <ellipse rx="11" ry="4.2" transform="rotate(120)" />
     </g>
   </svg>
 )
@@ -38,25 +38,25 @@ const projects = [
     desc: 'Production-grade email security platform with a multi-stage ML pipeline (Naive Bayes + SGD + Transformer). Features explainable AI, phishing detection, a Chrome extension for Gmail, and an adaptive feedback loop for continuous retraining.',
     tags: ['Python', 'FastAPI', 'NLP', 'React', 'Chrome Extension'],
     accent: '#ff6044',
-    github: 'https://github.com/navabro',
+    github: 'https://github.com/navabro/Navabro',
     demo: '#',
   },
   {
     icon: <Bot size={26} />,
-    title: 'ML Model Pipeline',
+    title: 'ML Models',
     desc: 'End-to-end machine learning pipeline for text classification. Custom preprocessing, feature engineering, model comparison dashboard, and real-time inference API built with FastAPI and deployed on the cloud.',
     tags: ['Scikit-learn', 'FastAPI', 'Docker', 'Python'],
     accent: '#ff6044',
-    github: 'https://github.com/navabro',
+    github: 'https://github.com/navabro/Image-Classifier-Dogs-vs-Cats',
     demo: '#',
   },
   {
     icon: <LayoutTemplate size={26} />,
-    title: 'Full-Stack Web App',
+    title: 'Hospital Management System',
     desc: 'Modern full-stack application with a React frontend featuring glassmorphism UI, a Node.js + Express backend, MongoDB Atlas integration, real-time CRUD operations, and authentication with JWT.',
     tags: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT'],
     accent: '#ff6044',
-    github: 'https://github.com/navabro',
+    github: 'https://github.com/navabro/manna-portfolio',
     demo: '#',
   },
 ]
@@ -72,7 +72,7 @@ function ProjectCard({ project, index }) {
       style={{ '--accent': project.accent }}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.12,  }}
+      transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.12, }}
       whileHover={{ y: -8 }}
     >
       <div className="project-card__icon">{project.icon}</div>
