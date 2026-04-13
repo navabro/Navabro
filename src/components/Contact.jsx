@@ -13,7 +13,7 @@ const socials = [
     icon: '💼',
     name: 'LinkedIn',
     handle: 'Navaneeth · VIT Chennai',
-    href: 'https://linkedin.com/in/navaneeth',
+    href: 'https://www.linkedin.com/in/navaneeth-vijay-881664361?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
   },
   {
     icon: '✉️',
